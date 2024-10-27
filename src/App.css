@@ -1,38 +1,65 @@
-.App {
+.title {
   text-align: center;
+  margin-bottom: 20px; /* Ajusta el espacio según sea necesario */
+  color: darkblue; /* Cambia el color si lo deseas */
+  font-weight: bold;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  position: relative;
+  width: 400px;
+  height: 500px; /* Aumenta la altura del contenedor si es necesario */
+  margin: 0 auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.court {
+  position: absolute;
+  top: 60%; /* Ajusta esto para mover la cancha hacia abajo */
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background-color: green;
+  transform: translate(-50%, -50%);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.rectangle {
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.top {
+  top: 30%; 
+  left: 50%;
+  transform: translateX(-50%);
 }
+
+.bottom {
+  bottom: 10%; 
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.left {
+  top: 60%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.right {
+  top: 60%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+
