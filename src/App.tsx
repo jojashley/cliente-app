@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import './App.css'; 
-import axios from 'axios'; // Si decides usar Axios
+import axios from 'axios'; 
 
 const App: React.FC = () => {
   const [selectedZone, setSelectedZone] = useState<'A' | 'B' | 'C' | 'D' | null>(null);
@@ -10,23 +10,38 @@ const App: React.FC = () => {
 
   const handleCategorySelect = async (category: 'Graderia' | 'Club' | 'VIP') => {
     setSelectedCategory(category);
-    
-    // Verificar que hay una zona seleccionada
+  
     if (!selectedZone) {
       alert('Por favor, selecciona una zona primero.');
       return;
     }
-
-    // Formar la solicitud
-    const request = `display ${category} ${selectedZone}`;
-    
+  
+    const requestPayload = {
+      request: `display ${category} ${selectedZone}`
+    };
+  
     try {
-      const response = await axios.post('http://127.0.0.1:8080', { request });
-      setResponseData(response.data); // Asignar la respuesta al estado
+      const response = await axios.post(
+        'http://127.0.0.1:8080', 
+        requestPayload, 
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+      
+      setResponseData(response.data); 
+      console.log('Response from API:', response.data);
     } catch (error) {
-      console.error('Error al enviar la solicitud:', error);
-      setResponseData('Error al obtener los datos.'); // Mensaje de error
-    }
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Error de respuesta:', error.response.data);
+        setResponseData(`Error del servidor: ${error.response.data}`);
+      } else if (error instanceof Error) {
+        console.error('Error de solicitud:', error.message);
+        setResponseData(`Error en la solicitud: ${error.message}`);
+      } else {
+        console.error('Error desconocido:', error);
+        setResponseData('Error desconocido al obtener los datos.');
+      }
+   }
+   
   };
 
   return (
@@ -56,9 +71,9 @@ const App: React.FC = () => {
 
       {selectedZone && (
         <div className="categories">
-          <div className="category" onClick={() => setSelectedCategory('Graderia')}>Graderia</div>
-          <div className="category" onClick={() => setSelectedCategory('Club')}>Club</div>
-          <div className="category" onClick={() => setSelectedCategory('VIP')}>VIP</div>
+          <div className="category" onClick={() => handleCategorySelect('Graderia')}>Graderia</div>
+          <div className="category" onClick={() => handleCategorySelect('Club')}>Club</div>
+          <div className="category" onClick={() => handleCategorySelect('VIP')}>VIP</div>
         </div>
       )}
 
@@ -66,10 +81,8 @@ const App: React.FC = () => {
         <div className="selected-category">
           <h2>Categoría</h2>
           <h3>{selectedCategory}</h3>
-          <h2>Asientos</h2> {/* Nuevo encabezado para Asientos */}
-          {responseData && (
-            <pre>{responseData}</pre> // Muestra la respuesta aquí
-          )}
+          <h2>Asientos</h2> 
+          <p>{responseData}</p> 
         </div>
       )}
     </div>
