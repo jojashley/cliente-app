@@ -1,65 +1,70 @@
-.title {
+.ticket-purchase {
   text-align: center;
-  margin-bottom: 20px; /* Ajusta el espacio según sea necesario */
-  color: darkblue; /* Cambia el color si lo deseas */
-  font-weight: bold;
-}
-
-.container {
-  position: relative;
-  width: 400px;
-  height: 500px; /* Aumenta la altura del contenedor si es necesario */
-  margin: 0 auto;
+  margin: 20px;
 }
 
 .court {
-  position: absolute;
-  top: 60%; /* Ajusta esto para mover la cancha hacia abajo */
-  left: 50%;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 150px;
   background-color: green;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
+  position: relative;
+  margin: 20px auto;
 }
 
-.rectangle {
+.zone {
   position: absolute;
   width: 80px;
-  height: 40px;
-  background-color: lightblue;
+  height: 30px;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  border: 1px solid black;
 }
 
 .top {
-  top: 30%; 
+  top: -15px;
   left: 50%;
   transform: translateX(-50%);
 }
 
+.right {
+  top: 50%;
+  right: -15px;
+  transform: translateY(-50%);
+}
+
 .bottom {
-  bottom: 10%; 
+  bottom: -15px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .left {
-  top: 60%;
-  left: 0;
+  top: 50%;
+  left: -15px;
   transform: translateY(-50%);
 }
 
-.right {
-  top: 60%;
-  right: 0;
-  transform: translateY(-50%);
+.question {
+  margin-top: 20px;
 }
 
+.options button {
+  margin: 5px;
+}
 
+.categories {
+  margin-top: 20px;
+}
+
+.category {
+  background-color: lightgray;
+  padding: 10px;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+.selected-category {
+  margin-top: 20px;
+}
